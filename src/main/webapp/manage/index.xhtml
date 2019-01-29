@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+        <div class="content">
+            <h:form>
+                <f:metadata>
+                    <f:viewAction action="#{manageTechnicBean.prepare}"/>
+                </f:metadata>
+
+                <h2>Ready for reservation!</h2>
+
+                <h:dataTable value="#{manageTechnicBean.availableTechnics}" var="res">
+                    <h:column>
+                        <f:facet name="header">User</f:facet>
+                        #{res.user.loginName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Device</f:facet>
+                        #{res.technic.device}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Company</f:facet>
+                        #{res.technic.company}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Year</f:facet>
+                        #{res.technic.year}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandButton action="#{manageTechnicBean.giveTechnic(res)}" value="Give out!">
+                            <f:ajax render="@form" execute="@form"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+
+
+                <h2>Ready for return!</h2>
+
+                <h:dataTable value="#{manageTechnicBean.takenTechnics}" var="taken">
+                    <h:column>
+                        <f:facet name="header">User</f:facet>
+                        #{taken.user.loginName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Device</f:facet>
+                        #{taken.technic.device}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Company</f:facet>
+                        #{taken.technic.company}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Year</f:facet>
+                        #{taken.technic.year}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <h:commandButton action="#{manageTechnicBean.takeTechnic(taken)}" value="Take back!">
+                            <f:ajax render="@form" execute="@form"/>
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+
+
+                <h2>Closed reservations!</h2>
+
+                <h:dataTable value="#{manageTechnicBean.closedResult}" var="closed">
+                    <h:column>
+                        <f:facet name="header">User</f:facet>
+                        #{closed.user.loginName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Device</f:facet>
+                        #{closed.technic.device}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Company</f:facet>
+                        #{closed.technic.company}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Year</f:facet>
+                        #{closed.technic.year}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                        #{closed.status}
+                    </h:column>
+                </h:dataTable>
+
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

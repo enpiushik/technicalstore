@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+        <div class="content">
+
+            <f:metadata>
+                <f:viewParam name="id" value="#{technicBean.id}"/>
+                <f:viewAction action="#{technicBean.openTechnic}"/>
+            </f:metadata>
+
+            <h:form>
+                <ui:fragment rendered="#{technicBean.updated}">
+                    <h2>Technic was updated successfully!</h2>
+                </ui:fragment>
+                <p>
+                    <h:outputLabel value="Device:"/>
+                    <h:inputText id="device" value="#{technicBean.technic.device}"/>
+                    <h:messages for="device"/>
+                </p>
+                <p>
+                    <h:outputLabel value="Company:"/>
+                    <h:inputText id="company" value="#{technicBean.technic.company}"/>
+                    <h:messages for="company"/>
+                </p>
+                <p>
+                    <h:outputLabel value="ISBN:"/>
+                    <h:inputText id="isbn" value="#{technicBean.technic.isbn}"/>
+                    <h:messages for="isbn"/>
+                </p>
+                <p>
+                    <h:outputLabel value="Year:"/>
+                    <h:inputText id="year" value="#{technicBean.technic.year}"/>
+                    <h:messages for="year"/>
+                </p>
+                <p>
+                    <h:outputLabel value="Description:"/> <br/>
+                    <h:inputTextarea value="#{technicBean.technic.description}"/>
+                </p>
+                <p>
+                    <h:commandButton action="#{technicBean.updateTechnics}" value="Update">
+                        <f:ajax render="@form" execute="@form"/>
+                    </h:commandButton>
+                </p>
+            </h:form>
+
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

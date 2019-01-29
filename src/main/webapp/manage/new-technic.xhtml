@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+        <div class="content">
+            <h:form>
+
+                <ui:fragment rendered="#{newTechnicBean.created}">
+                    <h2>Technic was created successfully!</h2>
+                </ui:fragment>
+
+                <p>
+                    <h:outputLabel value="Device:"/>
+                    <h:inputText id="device" value="#{newTechnicBean.technic.device}"/>
+                    <h:messages for="device"/>
+                </p>
+                <p>
+                    <h:outputLabel value="Company:"/>
+                    <h:inputText id="company" value="#{newTechnicBean.technic.company}"/>
+                    <h:messages for="company"/>
+                </p>
+                <p>
+                    <h:outputLabel value="ISBN:"/>
+                    <h:inputText id="isbn" value="#{newTechnicBean.technic.isbn}"/>
+                    <h:messages for="isbn"/>
+                </p>
+                <p>
+                    <h:outputLabel value="Year:"/>
+                    <h:inputText id="year" value="#{newTechnicBean.technic.year}"/>
+                    <h:messages for="year"/>
+                </p>
+                <p>
+                    <h:outputLabel value="Description:"/> <br/>
+                    <h:inputTextarea value="#{newTechnicBean.technic.description}"/>
+                </p>
+                <p>
+                    <h:commandButton action="#{newTechnicBean.createTechnic}" value="Create">
+                        <f:ajax render="@form" execute="@form"/>
+                    </h:commandButton>
+                </p>
+            </h:form>
+
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

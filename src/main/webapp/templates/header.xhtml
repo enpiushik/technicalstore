@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition>
+    <h:form>
+        <div class="topnav">
+
+            <ui:fragment rendered="#{request.isUserInRole('USER')}">
+                <h:link value="User space" outcome="/app/index.xhtml"/>
+                <h:link value="My technics" outcome="/app/my-technics.xhtml"/>
+            </ui:fragment>
+            <ui:fragment rendered="#{request.isUserInRole('MANAGER')}">
+                <h:link value="Manager space" outcome="/manage/index.xhtml"/>
+                <h:link value="Create technic" outcome="/manage/new-technic.xhtml"/>
+            </ui:fragment>
+            <ui:fragment rendered="#{request.isUserInRole('ADMIN')}">
+                <h:link value="Admin space" outcome="/admin/index.xhtml"/>
+                <h:link value="List of users" outcome="/admin/user-list.xhtml"/>
+            </ui:fragment>
+            <ui:fragment rendered="#{empty currentUser.user}">
+                <h:link value="Login" outcome="/app/index.xhtml"/>
+                <h:link value="Registration" outcome="/registration.xhtml"/>
+            </ui:fragment>
+            <ui:fragment rendered="#{not empty currentUser.user}">
+                <h:commandLink value="Logout" action="#{loginBean.logout}"/>
+            </ui:fragment>
+
+        </div>
+    </h:form>
+</ui:composition>
+</html>

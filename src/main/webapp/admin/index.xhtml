@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+        <div class="content">
+            <h:form>
+                <ui:fragment rendered="#{technicsListBean.deleted}">
+                    <h2>Technic was deleted successfully!</h2>
+                </ui:fragment>
+                <p>
+                    <h:inputText value="#{technicsListBean.term}"/>
+                    <h:commandButton value="search" action="#{technicsListBean.doSearch}">
+                        <f:ajax execute="@form" render="@form"/>
+                    </h:commandButton>
+                </p>
+
+                <h:outputLabel value="not found" rendered="#{empty technicsListBean.technics}"/>
+                <h:dataTable value="#{technicsListBean.technics}" var="technic"
+                             rendered="#{not empty technicsListBean.technics}">
+                    <h:column>
+                        <f:facet name="header">ID</f:facet>
+                        #{technic.id}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Device</f:facet>
+                        #{technic.device}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Company</f:facet>
+                        #{technic.company}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Year</f:facet>
+                        #{technic.year}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Update</f:facet>
+                        <h:outputLink value="update.xhtml">update
+                            <f:param name="id" value="#{technic.id}"/>
+                        </h:outputLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Delete</f:facet>
+                        <h:commandLink action="#{technicsListBean.deleteTechnics}">delete
+                            <f:setPropertyActionListener value="#{technic.id}" target="#{technicsListBean.id}"/>
+                            <f:ajax render="@form" execute="@form"/>
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>
